@@ -22,7 +22,8 @@ class TestApp : public BaseApp
 		int aP;
 		int bP;
 		int B;
-		wchar_t Word[10] = {};
+		wchar_t Word[10] = {};//строка счета игры
+		wchar_t TempWord[10] = {};//первоначальное состяние строки счета игры
 		int Temp;//кличество не пустых элементов массива Word
 		int x;// начальные координаты фигуры на поле
 		int y;
@@ -64,7 +65,7 @@ class TestApp : public BaseApp
 
 		Well well;
 		Well Previu;
-		
+		bool going_beyond;
 		virtual void KeyPressed(int btnCode);
 		virtual void UpdateF(float deltaTime);
 		

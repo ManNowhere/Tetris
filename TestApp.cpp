@@ -20,6 +20,7 @@ TestApp::TestApp()
 	well(b, std::vector<wchar_t>(a, L'.')),//сам колодец
 	Previu(aP, std::vector<wchar_t>(bP, L'.')),//отражается следующая фигура игры
 	Word{ L'S', L'c', L'o', L'r', L'e', L':' },
+	TempWord{ L'S', L'c', L'o', L'r', L'e', L':' },
 	B(0),//интовое значение очков игры
 	Temp(0),//кличество не пустых элементов массива Word
 	Direction( true )
@@ -41,9 +42,6 @@ TestApp::TestApp()
 
 	DrowScreen();
 }
-
-
-
 
 
 //создает фигуру
@@ -170,7 +168,9 @@ TestApp::TestApp()
 
 	void TestApp::DrowScore()//отображает счет игры
 	{
-		wchar_t buf[2];//..что осталось от инта B
+		
+		copy_n(TempWord, 10, Word);
+		wchar_t buf[4];//..что осталось от инта B
 		_itow_s(B, buf, 10);//преобразуем int в char
 		wcscat_s(Word, buf);// складываем два chara вместе
 
@@ -179,7 +179,6 @@ TestApp::TestApp()
 		{
 			++Temp;
 		}
-
 
 		for (int i = 0; i < Temp; ++i)
 		{
@@ -240,12 +239,10 @@ TestApp::TestApp()
 		}
 	}
 
-
-
 	//управляет тремя функциями для удаления строки
 	void TestApp::Delete_filled_lines()
 	{
-		for (int i = well.size() - 1;  !is_line_empty(well[i])  ; --i)
+		for (int i = well.size() - 1;  !(is_line_empty(well[i])) || i < 1; --i)
 		{
 			while (is_line_filled(well[i]))
 			{
@@ -253,9 +250,7 @@ TestApp::TestApp()
 				//--i;
 			}
 		}
-		
 	}
-
 
 	//удаляет полную строку и заполняет ее пустыми элементами
 	void TestApp::Delete_line(Well& well, int line_index)
@@ -264,14 +259,13 @@ TestApp::TestApp()
 			{
 				well[line_index][i] = L'.';
 			}
-
 			while (is_line_empty(well[line_index]) && line_index >= 1)
 			{
 				swap(well[line_index], well[line_index - 1]);
 				--line_index;
 			}
 		
-		
+			++B;
 	}
 
 	//если не втсретил этот элемент ни разу, знач строка пустая
@@ -280,27 +274,34 @@ TestApp::TestApp()
 		return !any_of(Line.begin(), Line.end(), [](wchar_t j) {return j == L'@'; });
 	}
 
-
-	//если строка полная
+	//если строка полная возвращаем true
 	bool TestApp::is_line_filled(const std::vector<wchar_t>& Line)const
 	{
 		return !any_of(Line.begin(), Line.end(), [](wchar_t j) {return j == L'.'; });
 	}
 
-
+	
 
 	void TestApp::KeyPressed(int btnCode)
 {
 	
 		switch (btnCode)
 		{
-
 		//поворот фигуры
 		case 32:
 			//clearKeyboardBuffer();
 			Old_Position = PtrTetra->get_position();
 			PtrTetra->rotate();
 			New_Position = PtrTetra->get_position();
+			//если развернутая фигура выходит за пределы колодца, отодвигаем точку начала отрисовки фигуры по оси Х на 1 назад
+			for (int i = 0; i < New_Position.size(); i++)
+			{
+				if ((NewPosition.X + New_Position[i].X) >= well[0].size())
+				{
+					--NewPosition.X;
+					i = 0;
+				}
+			}
 			SetTetramino(PtrTetra);
 			DrowWell();
 			break;
@@ -362,6 +363,7 @@ TestApp::TestApp()
 				 Old_Position = PtrTetra->get_position();
 				 New_Position = PtrTetra->get_position();
 				 DrowWell();
+				 DrowScore();
 				 return;
 			 }
 			 Time_to_update = 0;
