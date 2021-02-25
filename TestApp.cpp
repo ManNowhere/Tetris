@@ -26,6 +26,7 @@ TestApp::TestApp()
 	Direction( true )
 {
 	TestApp::GetTetramino();
+	PtrTetra = PtrTetraNext;
 	Old_Position = PtrTetra->get_position();
 	New_Position = PtrTetra->get_position();
 	xDrowScreen = 0;
@@ -54,27 +55,26 @@ TestApp::TestApp()
 	switch (num)
 	{
 	case 1:
-		PtrTetra = new T();
+		PtrTetraNext = new T();
 		break;
 	case 2:
-		PtrTetra = new O();
+		PtrTetraNext = new O();
 		break;
 	case 3:
-		PtrTetra = new I();
+		PtrTetraNext = new I();
 		break;
 	case 4:
-		PtrTetra = new Z();
+		PtrTetraNext = new Z();
 		break;
 	case 5:
-		PtrTetra = new S();
+		PtrTetraNext = new S();
 		break;
 	case 6:
-		PtrTetra = new J();
+		PtrTetraNext = new J();
 		break;
 	case 7:
-		PtrTetra = new L();
+		PtrTetraNext = new L();
 		break;
-
 	}
 }
 
@@ -156,13 +156,20 @@ TestApp::TestApp()
 	}
 
 	void TestApp::DrowPreview()//рисует анонс фигуры
-	{
+	{	
+		Figure Preview = PtrTetraNext->get_position();
+
 		for (int i = 0; i < aP; i++)
 		{
 			for (int j = 0; j < bP; j++)
 			{
-				SetChar(xDrowPreview + i, yDrowPreview + j, Previu[i][j]);
+				SetChar(xDrowPreview + i, yDrowPreview + j, L' ');
 			}
+		}
+
+		for (int i = 0; i < 4; ++i)
+		{
+			SetChar((xDrowPreview + Preview[i].X)+1, yDrowPreview + Preview[i].Y, L'@');
 		}
 	}
 
@@ -359,11 +366,13 @@ TestApp::TestApp()
 				 NewPosition.Y = y;
 				 OldPosition = NewPosition;
 				 current_speed = default_speed;
+				 PtrTetra = PtrTetraNext;
 				 GetTetramino(); 
 				 Old_Position = PtrTetra->get_position();
 				 New_Position = PtrTetra->get_position();
 				 DrowWell();
 				 DrowScore();
+				 DrowPreview();
 				 return;
 			 }
 			 Time_to_update = 0;

@@ -37,6 +37,7 @@ class TestApp : public BaseApp
 		int xDrowScore;
 		int yDrowScore;
 		ITetramino* PtrTetra;
+		ITetramino* PtrTetraNext;
 		Figure Old_Position;//старое положение фигуры
 		Figure New_Position;// новое положение фигуры
 
