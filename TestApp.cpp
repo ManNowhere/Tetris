@@ -25,10 +25,11 @@ TestApp::TestApp()
 	Temp(0),//кличество не пустых элементов массива Word
 	Direction( true )
 {
-	TestApp::GetTetramino();
-	PtrTetra = PtrTetraNext;
-	Old_Position = PtrTetra->get_position();
-	New_Position = PtrTetra->get_position();
+	PtrTetraСurrent = TestApp::GetTetramino();
+	PtrTetraNext = TestApp::GetTetramino();
+	//PtrTetraСurrent = PtrTetraNext;
+	Old_Position = PtrTetraСurrent->get_position();
+	New_Position = PtrTetraСurrent->get_position();
 	xDrowScreen = 0;
 	yDrowScreen = 0;
 	xDrowWell = 1;
@@ -46,8 +47,10 @@ TestApp::TestApp()
 
 
 //создает фигуру
-	void TestApp::GetTetramino()
+ITetramino* TestApp::GetTetramino()
 {
+	ITetramino* TempPtrTetra = new T();
+
 	srand(time(NULL));
 	int num;
 	num = 1 + rand() % 7;
@@ -55,27 +58,35 @@ TestApp::TestApp()
 	switch (num)
 	{
 	case 1:
-		PtrTetraNext = new T();
+		TempPtrTetra = new T();
+		return TempPtrTetra;
 		break;
 	case 2:
-		PtrTetraNext = new O();
+		TempPtrTetra = new O();
+		return TempPtrTetra;
 		break;
 	case 3:
-		PtrTetraNext = new I();
+		TempPtrTetra = new I();
+		return TempPtrTetra;
 		break;
 	case 4:
-		PtrTetraNext = new Z();
+		TempPtrTetra = new Z();
+		return TempPtrTetra;
 		break;
 	case 5:
-		PtrTetraNext = new S();
+		TempPtrTetra = new S();
+		return TempPtrTetra;
 		break;
 	case 6:
-		PtrTetraNext = new J();
+		TempPtrTetra = new J();
+		return TempPtrTetra;
 		break;
 	case 7:
-		PtrTetraNext = new L();
+		TempPtrTetra = new L();
+		return TempPtrTetra;
 		break;
 	}
+	return TempPtrTetra;
 }
 
 	float Time_to_update = 0;
@@ -99,6 +110,7 @@ TestApp::TestApp()
 	{
 		new_x_position = NewPosition.X + New_Position[i].X;
 		new_y_position = NewPosition.Y + New_Position[i].Y;
+
 		well[new_y_position][new_x_position] = L'@';
 	}
 	OldPosition = NewPosition;
@@ -225,7 +237,7 @@ TestApp::TestApp()
 
 	bool TestApp::belongs_to_figure(const COORD_& coord)
 	{
-		const auto figure = PtrTetra->get_position();
+		const auto figure = PtrTetraСurrent->get_position();
 
 		for (size_t i = 0; i < figure.size(); i++)
 		{
@@ -297,9 +309,9 @@ TestApp::TestApp()
 		//поворот фигуры
 		case 32:
 			//clearKeyboardBuffer();
-			Old_Position = PtrTetra->get_position();
-			PtrTetra->rotate();
-			New_Position = PtrTetra->get_position();
+			Old_Position = PtrTetraСurrent->get_position();
+			PtrTetraСurrent->rotate();
+			New_Position = PtrTetraСurrent->get_position();
 			//если развернутая фигура выходит за пределы колодца, отодвигаем точку начала отрисовки фигуры по оси Х на 1 назад
 			for (int i = 0; i < New_Position.size(); i++)
 			{
@@ -309,7 +321,7 @@ TestApp::TestApp()
 					i = 0;
 				}
 			}
-			SetTetramino(PtrTetra);
+			SetTetramino(PtrTetraСurrent);
 			DrowWell();
 			break;
 
@@ -317,11 +329,12 @@ TestApp::TestApp()
 		case 75:
 			//clearKeyboardBuffer();
 			--NewPosition.X;
-			if (NewPosition.X < 0)
+			if (!Verific(PtrTetraСurrent))
 			{
-				NewPosition.X = 0;
+				++NewPosition.X;
+				break;
 			}
-			SetTetramino(PtrTetra);
+			SetTetramino(PtrTetraСurrent);
 			DrowWell();
 			break;
 
@@ -329,11 +342,12 @@ TestApp::TestApp()
 		case 77:
 			//clearKeyboardBuffer();
 			++NewPosition.X;
-			if (!Verific(PtrTetra))
+			if (!Verific(PtrTetraСurrent))
 			{
 				--NewPosition.X;
+				break;
 			}
-			SetTetramino(PtrTetra);
+			SetTetramino(PtrTetraСurrent);
 			DrowWell();
 			break;
 
@@ -353,9 +367,9 @@ TestApp::TestApp()
 		 if (Time_to_update >= current_speed)
 		 {
 			 
-			 if(Verific(PtrTetra))
+			 if(Verific(PtrTetraСurrent))
 			 {
-				 SetTetramino(PtrTetra);
+				 SetTetramino(PtrTetraСurrent);
 				 DrowWell();
 				 NewPosition.Y++;
 			 }
@@ -366,10 +380,11 @@ TestApp::TestApp()
 				 NewPosition.Y = y;
 				 OldPosition = NewPosition;
 				 current_speed = default_speed;
-				 PtrTetra = PtrTetraNext;
-				 GetTetramino(); 
-				 Old_Position = PtrTetra->get_position();
-				 New_Position = PtrTetra->get_position();
+				 delete PtrTetraСurrent;
+				 PtrTetraСurrent = PtrTetraNext;
+				 PtrTetraNext = GetTetramino();
+				 Old_Position = PtrTetraСurrent->get_position();
+				 New_Position = PtrTetraСurrent->get_position();
 				 DrowWell();
 				 DrowScore();
 				 DrowPreview();

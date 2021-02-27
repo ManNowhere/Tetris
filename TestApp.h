@@ -14,7 +14,7 @@ class TestApp : public BaseApp
 		COORD_ OldPosition;// координаты фигуры на поле
 		COORD_ NewPosition;
 		void SetTetramino(ITetramino *PtrTetra);//помещает в колодец фигуру
-		void GetTetramino();//возвращает ссылку на фигуру
+		ITetramino* GetTetramino();//возвращает ссылку на фигуру
 		bool Verific(ITetramino* PtrTetra);
 		bool Direction;
 		int a;
@@ -36,7 +36,7 @@ class TestApp : public BaseApp
 		int yDrowPreview;
 		int xDrowScore;
 		int yDrowScore;
-		ITetramino* PtrTetra;
+		ITetramino* PtrTetraСurrent;
 		ITetramino* PtrTetraNext;
 		Figure Old_Position;//старое положение фигуры
 		Figure New_Position;// новое положение фигуры
