@@ -47,7 +47,7 @@ TestApp::TestApp()
 
 
 //создает фигуру
-ITetramino* TestApp::GetTetramino()
+	ITetramino* TestApp::GetTetramino()
 {
 	ITetramino* TempPtrTetra = new T();
 
