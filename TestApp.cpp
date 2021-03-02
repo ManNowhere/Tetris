@@ -11,25 +11,25 @@
 
 TestApp::TestApp()
 	: Parent(23, 28),
-	x(6),//начало отрисовки фигуры на поле
+	x(6),//Г­Г Г·Г Г«Г® Г®ГІГ°ГЁГ±Г®ГўГЄГЁ ГґГЁГЈГіГ°Г» Г­Г  ГЇГ®Г«ГҐ
 	y(0),
-	a(15),//ширина колодца
-	b(20),//высота колодца
-	aP(4),//размер превью
+	a(15),//ГёГЁГ°ГЁГ­Г  ГЄГ®Г«Г®Г¤Г¶Г 
+	b(20),//ГўГ»Г±Г®ГІГ  ГЄГ®Г«Г®Г¤Г¶Г 
+	aP(4),//Г°Г Г§Г¬ГҐГ° ГЇГ°ГҐГўГјГѕ
 	bP(4),
-	well(b, std::vector<wchar_t>(a, L'.')),//сам колодец
-	Previu(aP, std::vector<wchar_t>(bP, L'.')),//отражается следующая фигура игры
+	well(b, std::vector<wchar_t>(a, L'.')),//Г±Г Г¬ ГЄГ®Г«Г®Г¤ГҐГ¶
+	Previu(aP, std::vector<wchar_t>(bP, L'.')),//Г®ГІГ°Г Г¦Г ГҐГІГ±Гї Г±Г«ГҐГ¤ГіГѕГ№Г Гї ГґГЁГЈГіГ°Г  ГЁГЈГ°Г»
 	Word{ L'S', L'c', L'o', L'r', L'e', L':' },
 	TempWord{ L'S', L'c', L'o', L'r', L'e', L':' },
-	B(0),//интовое значение очков игры
-	Temp(0),//кличество не пустых элементов массива Word
+	B(0),//ГЁГ­ГІГ®ГўГ®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ Г®Г·ГЄГ®Гў ГЁГЈГ°Г»
+	Temp(0),//ГЄГ«ГЁГ·ГҐГ±ГІГўГ® Г­ГҐ ГЇГіГ±ГІГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў Г¬Г Г±Г±ГЁГўГ  Word
 	Direction( true )
 {
-	PtrTetraСurrent = TestApp::GetTetramino();
+	PtrTetraCurrent = TestApp::GetTetramino();
 	PtrTetraNext = TestApp::GetTetramino();
-	//PtrTetraСurrent = PtrTetraNext;
-	Old_Position = PtrTetraСurrent->get_position();
-	New_Position = PtrTetraСurrent->get_position();
+	//PtrTetraГ‘urrent = PtrTetraNext;
+	Old_Position = PtrTetraГ‘urrent->get_position();
+	New_Position = PtrTetraГ‘urrent->get_position();
 	xDrowScreen = 0;
 	yDrowScreen = 0;
 	xDrowWell = 1;
@@ -46,7 +46,7 @@ TestApp::TestApp()
 }
 
 
-//создает фигуру
+//Г±Г®Г§Г¤Г ГҐГІ ГґГЁГЈГіГ°Гі
 	ITetramino* TestApp::GetTetramino()
 {
 	ITetramino* TempPtrTetra = new T();
@@ -119,7 +119,7 @@ TestApp::TestApp()
 }
 
 
-	//поверить все элементы массива на принадлежность игровому полю и самой фигуре
+	//ГЇГ®ГўГҐГ°ГЁГІГј ГўГ±ГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ» Г¬Г Г±Г±ГЁГўГ  Г­Г  ГЇГ°ГЁГ­Г Г¤Г«ГҐГ¦Г­Г®Г±ГІГј ГЁГЈГ°Г®ГўГ®Г¬Гі ГЇГ®Г«Гѕ ГЁ Г±Г Г¬Г®Г© ГґГЁГЈГіГ°ГҐ
 	bool TestApp::Verific(ITetramino* PtrTetra)
 {
 	for (int i = 0; i < 4; ++i)
@@ -147,7 +147,7 @@ TestApp::TestApp()
 	return true;
 }
 
-	void TestApp::DrowScreen()//рисует все окно игры
+	void TestApp::DrowScreen()//Г°ГЁГ±ГіГҐГІ ГўГ±ГҐ Г®ГЄГ­Г® ГЁГЈГ°Г»
 {
 	DrowBorders();
 	DrowPreview();
@@ -156,7 +156,7 @@ TestApp::TestApp()
 	
 }
 
-	void TestApp::DrowWell()//рисует колодец с фигурами
+	void TestApp::DrowWell()//Г°ГЁГ±ГіГҐГІ ГЄГ®Г«Г®Г¤ГҐГ¶ Г± ГґГЁГЈГіГ°Г Г¬ГЁ
 	{
 		for (int i = 0; i < b; ++i)
 		{
@@ -167,7 +167,7 @@ TestApp::TestApp()
 		}
 	}
 
-	void TestApp::DrowPreview()//рисует анонс фигуры
+	void TestApp::DrowPreview()//Г°ГЁГ±ГіГҐГІ Г Г­Г®Г­Г± ГґГЁГЈГіГ°Г»
 	{	
 		Figure Preview = PtrTetraNext->get_position();
 
@@ -185,15 +185,15 @@ TestApp::TestApp()
 		}
 	}
 
-	void TestApp::DrowScore()//отображает счет игры
+	void TestApp::DrowScore()//Г®ГІГ®ГЎГ°Г Г¦Г ГҐГІ Г±Г·ГҐГІ ГЁГЈГ°Г»
 	{
 		
 		copy_n(TempWord, 10, Word);
-		wchar_t buf[4];//..что осталось от инта B
-		_itow_s(B, buf, 10);//преобразуем int в char
-		wcscat_s(Word, buf);// складываем два chara вместе
+		wchar_t buf[4];//..Г·ГІГ® Г®Г±ГІГ Г«Г®Г±Гј Г®ГІ ГЁГ­ГІГ  B
+		_itow_s(B, buf, 10);//ГЇГ°ГҐГ®ГЎГ°Г Г§ГіГҐГ¬ int Гў char
+		wcscat_s(Word, buf);// Г±ГЄГ«Г Г¤Г»ГўГ ГҐГ¬ Г¤ГўГ  chara ГўГ¬ГҐГ±ГІГҐ
 
-		// считаем не пустые элементы массива Word
+		// Г±Г·ГЁГІГ ГҐГ¬ Г­ГҐ ГЇГіГ±ГІГ»ГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ» Г¬Г Г±Г±ГЁГўГ  Word
 		while (Word[Temp] != 0)
 		{
 			++Temp;
@@ -205,7 +205,7 @@ TestApp::TestApp()
 		}
 	}
 
-	void TestApp::DrowBorders()// отображает границы игрового поля
+	void TestApp::DrowBorders()// Г®ГІГ®ГЎГ°Г Г¦Г ГҐГІ ГЈГ°Г Г­ГЁГ¶Г» ГЁГЈГ°Г®ГўГ®ГЈГ® ГЇГ®Г«Гї
 	{
 
 		for (int i = 0; i < X_SIZE; ++i)
@@ -237,7 +237,7 @@ TestApp::TestApp()
 
 	bool TestApp::belongs_to_figure(const COORD_& coord)
 	{
-		const auto figure = PtrTetraСurrent->get_position();
+		const auto figure = PtrTetraГ‘urrent->get_position();
 
 		for (size_t i = 0; i < figure.size(); i++)
 		{
@@ -258,7 +258,7 @@ TestApp::TestApp()
 		}
 	}
 
-	//управляет тремя функциями для удаления строки
+	//ГіГЇГ°Г ГўГ«ГїГҐГІ ГІГ°ГҐГ¬Гї ГґГіГ­ГЄГ¶ГЁГїГ¬ГЁ Г¤Г«Гї ГіГ¤Г Г«ГҐГ­ГЁГї Г±ГІГ°Г®ГЄГЁ
 	void TestApp::Delete_filled_lines()
 	{
 		for (int i = well.size() - 1;  !(is_line_empty(well[i])) || i < 1; --i)
@@ -271,7 +271,7 @@ TestApp::TestApp()
 		}
 	}
 
-	//удаляет полную строку и заполняет ее пустыми элементами
+	//ГіГ¤Г Г«ГїГҐГІ ГЇГ®Г«Г­ГіГѕ Г±ГІГ°Г®ГЄГі ГЁ Г§Г ГЇГ®Г«Г­ГїГҐГІ ГҐГҐ ГЇГіГ±ГІГ»Г¬ГЁ ГЅГ«ГҐГ¬ГҐГ­ГІГ Г¬ГЁ
 	void TestApp::Delete_line(Well& well, int line_index)
 	{
 			for (int i = 0; i < well[line_index].size(); ++i)
@@ -287,13 +287,13 @@ TestApp::TestApp()
 			++B;
 	}
 
-	//если не втсретил этот элемент ни разу, знач строка пустая
+	//ГҐГ±Г«ГЁ Г­ГҐ ГўГІГ±Г°ГҐГІГЁГ« ГЅГІГ®ГІ ГЅГ«ГҐГ¬ГҐГ­ГІ Г­ГЁ Г°Г Г§Гі, Г§Г­Г Г· Г±ГІГ°Г®ГЄГ  ГЇГіГ±ГІГ Гї
 	bool TestApp::is_line_empty(const std::vector<wchar_t>& Line) const
 	{
 		return !any_of(Line.begin(), Line.end(), [](wchar_t j) {return j == L'@'; });
 	}
 
-	//если строка полная возвращаем true
+	//ГҐГ±Г«ГЁ Г±ГІГ°Г®ГЄГ  ГЇГ®Г«Г­Г Гї ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬ true
 	bool TestApp::is_line_filled(const std::vector<wchar_t>& Line)const
 	{
 		return !any_of(Line.begin(), Line.end(), [](wchar_t j) {return j == L'.'; });
@@ -306,13 +306,13 @@ TestApp::TestApp()
 	
 		switch (btnCode)
 		{
-		//поворот фигуры
+		//ГЇГ®ГўГ®Г°Г®ГІ ГґГЁГЈГіГ°Г»
 		case 32:
 			//clearKeyboardBuffer();
-			Old_Position = PtrTetraСurrent->get_position();
-			PtrTetraСurrent->rotate();
-			New_Position = PtrTetraСurrent->get_position();
-			//если развернутая фигура выходит за пределы колодца, отодвигаем точку начала отрисовки фигуры по оси Х на 1 назад
+			Old_Position = PtrTetraГ‘urrent->get_position();
+			PtrTetraГ‘urrent->rotate();
+			New_Position = PtrTetraГ‘urrent->get_position();
+			//ГҐГ±Г«ГЁ Г°Г Г§ГўГҐГ°Г­ГіГІГ Гї ГґГЁГЈГіГ°Г  ГўГ»ГµГ®Г¤ГЁГІ Г§Г  ГЇГ°ГҐГ¤ГҐГ«Г» ГЄГ®Г«Г®Г¤Г¶Г , Г®ГІГ®Г¤ГўГЁГЈГ ГҐГ¬ ГІГ®Г·ГЄГі Г­Г Г·Г Г«Г  Г®ГІГ°ГЁГ±Г®ГўГЄГЁ ГґГЁГЈГіГ°Г» ГЇГ® Г®Г±ГЁ Г• Г­Г  1 Г­Г Г§Г Г¤
 			for (int i = 0; i < New_Position.size(); i++)
 			{
 				if ((NewPosition.X + New_Position[i].X) >= well[0].size())
@@ -321,37 +321,37 @@ TestApp::TestApp()
 					i = 0;
 				}
 			}
-			SetTetramino(PtrTetraСurrent);
+			SetTetramino(PtrTetraГ‘urrent);
 			DrowWell();
 			break;
 
-		//влево
+		//ГўГ«ГҐГўГ®
 		case 75:
 			//clearKeyboardBuffer();
 			--NewPosition.X;
-			if (!Verific(PtrTetraСurrent))
+			if (!Verific(PtrTetraГ‘urrent))
 			{
 				++NewPosition.X;
 				break;
 			}
-			SetTetramino(PtrTetraСurrent);
+			SetTetramino(PtrTetraГ‘urrent);
 			DrowWell();
 			break;
 
-		//вправо
+		//ГўГЇГ°Г ГўГ®
 		case 77:
 			//clearKeyboardBuffer();
 			++NewPosition.X;
-			if (!Verific(PtrTetraСurrent))
+			if (!Verific(PtrTetraГ‘urrent))
 			{
 				--NewPosition.X;
 				break;
 			}
-			SetTetramino(PtrTetraСurrent);
+			SetTetramino(PtrTetraГ‘urrent);
 			DrowWell();
 			break;
 
-		//вниз
+		//ГўГ­ГЁГ§
 		case 80:
 			//clearKeyboardBuffer();
 			current_speed = 0.03;
@@ -367,9 +367,9 @@ TestApp::TestApp()
 		 if (Time_to_update >= current_speed)
 		 {
 			 
-			 if(Verific(PtrTetraСurrent))
+			 if(Verific(PtrTetraГ‘urrent))
 			 {
-				 SetTetramino(PtrTetraСurrent);
+				 SetTetramino(PtrTetraГ‘urrent);
 				 DrowWell();
 				 NewPosition.Y++;
 			 }
@@ -380,11 +380,11 @@ TestApp::TestApp()
 				 NewPosition.Y = y;
 				 OldPosition = NewPosition;
 				 current_speed = default_speed;
-				 delete PtrTetraСurrent;
-				 PtrTetraСurrent = PtrTetraNext;
+				 delete PtrTetraГ‘urrent;
+				 PtrTetraГ‘urrent = PtrTetraNext;
 				 PtrTetraNext = GetTetramino();
-				 Old_Position = PtrTetraСurrent->get_position();
-				 New_Position = PtrTetraСurrent->get_position();
+				 Old_Position = PtrTetraГ‘urrent->get_position();
+				 New_Position = PtrTetraГ‘urrent->get_position();
 				 DrowWell();
 				 DrowScore();
 				 DrowPreview();
