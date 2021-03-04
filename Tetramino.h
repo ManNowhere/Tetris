@@ -4,32 +4,32 @@
 
 struct COORD_
 {
-	int X;
-	int Y;
+	int mX;
+	int mY;
 
 	
 	friend bool operator<(const COORD_& left, const COORD_& right)
 	{
-		return (left.X < right.X) && (left.Y < right.Y);
+		return (left.mX < right.mX) && (left.mY < right.mY);
 	}
 
 	friend bool operator==(const COORD_& left, const COORD_& right)
 	{
-		return (left.X == right.X) && (left.Y == right.Y);
+		return (left.mX == right.mX) && (left.mY == right.mY);
 	}
 	
 	friend COORD_ operator+(const COORD_& left, const COORD_& right)
 	{
 		COORD_ tmp;
-		tmp.X = left.X + right.X;
-		tmp.Y = left.Y + right.Y;
+		tmp.mX = left.mX + right.mX;
+		tmp.mY = left.mY + right.mY;
 		return tmp;
 	}
 
 	COORD_& operator=(const COORD_& left)
 	{
-		this->X = left.X;
-		this->Y = left.Y;
+		this->mX = left.mX;
+		this->mY = left.mY;
 		return *this;
 	}
 	
@@ -43,8 +43,8 @@ class ITetramino
 {
 public:
 
-	virtual std::vector<COORD_> &get_position() = 0;//возвращает координаты фигуры
-	virtual std::vector<COORD_>& rotate() = 0;//возвращает указатель на массив координат фигуры при повороте фигуры
+	virtual std::vector<COORD_>& GetPosition() = 0;//возвращает координаты фигуры
+	virtual std::vector<COORD_>& Rotate() = 0;//возвращает указатель на массив координат фигуры при повороте фигуры
 };
 
 //фигуры тетриса
@@ -55,16 +55,16 @@ public:
 	T();
 	~T() {}
 
-	std::vector<COORD_>& get_position();//возвращает фигуру
+	std::vector<COORD_>& GetPosition();//возвращает фигуру
 
-	std::vector<COORD_>& rotate();//возвращает ссылку на массив координат при повороте фигуры
+	std::vector<COORD_>& Rotate();//возвращает ссылку на массив координат при повороте фигуры
 
-	void initTetraForm();//инициализация вектора Tetra_form
+	void initTetraForm();//инициализация вектора TetraForm
 
 private:
-	int FormSize = 4;//количество положений фигуры
-	int t = 0;//порядковый номер положения фигуры
-	std::vector<std::vector<COORD_>>Tetra_form; //массив положений фигуры
+	int mFormSize = 4;//количество положений фигуры
+	int mT = 0;//порядковый номер положения фигуры
+	std::vector<std::vector<COORD_>>TetraForm; //массив положений фигуры
 };
 
 
@@ -75,16 +75,16 @@ public:
 	J();
 	~J() {}
 
-	std::vector<COORD_>& get_position();//возвращает фигуру
+	std::vector<COORD_>& GetPosition();//возвращает фигуру
 
-	std::vector<COORD_>& rotate();//возвращает ссылку на массив координат при повороте фигуры
+	std::vector<COORD_>& Rotate();//возвращает ссылку на массив координат при повороте фигуры
 
-	void initTetraForm();//инициализация вектора Tetra_form
+	void initTetraForm();//инициализация вектора TetraForm
 
 private:
-	int FormSize = 4;//количество положений фигуры
-	int j = 0;//порядковый номер положения фигуры
-	std::vector<std::vector<COORD_>>Tetra_form; //массив положений фигуры
+	int mFormSize = 4;//количество положений фигуры
+	int mJ = 0;//порядковый номер положения фигуры
+	std::vector<std::vector<COORD_>>TetraForm; //массив положений фигуры
 };
 
 
@@ -97,16 +97,16 @@ public:
 	I();
 	~I() {}
 
-	std::vector<COORD_>& get_position();//возвращает фигуру
+	std::vector<COORD_>& GetPosition();//возвращает фигуру
 
-	std::vector<COORD_>& rotate();//возвращает ссылку на массив координат при повороте фигуры
+	std::vector<COORD_>& Rotate();//возвращает ссылку на массив координат при повороте фигуры
 
-	void initTetraForm();//инициализация вектора Tetra_form
+	void initTetraForm();//инициализация вектора TetraForm
 
 private:
-	int FormSize = 2;//количество положений фигуры
-	int i = 0;//порядковый номер положения фигуры
-	std::vector<std::vector<COORD_>>Tetra_form; //массив положений фигуры
+	int mFormSize = 2;//количество положений фигуры
+	int mI = 0;//порядковый номер положения фигуры
+	std::vector<std::vector<COORD_>>TetraForm; //массив положений фигуры
 };
 
 
@@ -119,16 +119,16 @@ public:
 	O();
 	~O() {}
 
-	std::vector<COORD_>& get_position();//возвращает фигуру
+	std::vector<COORD_>& GetPosition();//возвращает фигуру
 
-	std::vector<COORD_>& rotate();//возвращает ссылку на массив координат при повороте фигуры
+	std::vector<COORD_>& Rotate();//возвращает ссылку на массив координат при повороте фигуры
 
-	void initTetraForm();//инициализация вектора Tetra_form
+	void initTetraForm();//инициализация вектора TetraForm
 
 private:
-	int FormSize = 1;//количество положений фигуры
-	int o = 0;//порядковый номер положения фигуры
-	std::vector<std::vector<COORD_>>Tetra_form; //массив положений фигуры
+	int mFormSize = 1;//количество положений фигуры
+	int mO = 0;//порядковый номер положения фигуры
+	std::vector<std::vector<COORD_>>TetraForm; //массив положений фигуры
 };
 
 
@@ -140,16 +140,16 @@ public:
 	L();
 	~L() {}
 
-	std::vector<COORD_>& get_position();//возвращает фигуру
+	std::vector<COORD_>& GetPosition();//возвращает фигуру
 
-	std::vector<COORD_>& rotate();//возвращает ссылку на массив координат при повороте фигуры
+	std::vector<COORD_>& Rotate();//возвращает ссылку на массив координат при повороте фигуры
 
-	void initTetraForm();//инициализация вектора Tetra_form
+	void initTetraForm();//инициализация вектора TetraForm
 
 private:
-	int FormSize = 4;//количество положений фигуры
-	int l = 0;//порядковый номер положения фигуры
-	std::vector<std::vector<COORD_>>Tetra_form; //массив положений фигуры
+	int mFormSize = 4;//количество положений фигуры
+	int mL = 0;//порядковый номер положения фигуры
+	std::vector<std::vector<COORD_>>TetraForm; //массив положений фигуры
 };
 
 
@@ -162,16 +162,16 @@ public:
 	Z();
 	~Z() {}
 
-	std::vector<COORD_>& get_position();//возвращает фигуру
+	std::vector<COORD_>& GetPosition();//возвращает фигуру
 
-	std::vector<COORD_>& rotate();//возвращает ссылку на массив координат при повороте фигуры
+	std::vector<COORD_>& Rotate();//возвращает ссылку на массив координат при повороте фигуры
 
-	void initTetraForm();//инициализация вектора Tetra_form
+	void initTetraForm();//инициализация вектора TetraForm
 
 private:
-	int FormSize = 2;//количество положений фигуры
-	int z = 0;//порядковый номер положения фигуры
-	std::vector<std::vector<COORD_>>Tetra_form; //массив положений фигуры
+	int mFormSize = 2;//количество положений фигуры
+	int mZ = 0;//порядковый номер положения фигуры
+	std::vector<std::vector<COORD_>>TetraForm; //массив положений фигуры
 };
 
 
@@ -183,16 +183,16 @@ public:
 	S();
 	~S() {}
 
-	std::vector<COORD_>& get_position();//возвращает фигуру
+	std::vector<COORD_>& GetPosition();//возвращает фигуру
 
-	std::vector<COORD_>& rotate();//возвращает ссылку на массив координат при повороте фигуры
+	std::vector<COORD_>& Rotate();//возвращает ссылку на массив координат при повороте фигуры
 
-	void initTetraForm();//инициализация вектора Tetra_form
+	void initTetraForm();//инициализация вектора TetraForm
 
 private:
-	int FormSize = 2;//количество положений фигуры
-	int s = 0;//порядковый номер положения фигуры
-	std::vector<std::vector<COORD_>>Tetra_form; //массив положений фигуры
+	int mFormSize = 2;//количество положений фигуры
+	int mS = 0;//порядковый номер положения фигуры
+	std::vector<std::vector<COORD_>>TetraForm; //массив положений фигуры
 };
 
 

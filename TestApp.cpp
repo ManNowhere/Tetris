@@ -30,8 +30,8 @@ TestApp::TestApp()
     PtrTetraCurrent = GetTetramino();
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	PtrTetraNext = GetTetramino();
-    Old_Position = PtrTetraCurrent->get_position();
-    New_Position = PtrTetraCurrent->get_position();
+    Old_Position = PtrTetraCurrent->GetPosition();
+    New_Position = PtrTetraCurrent->GetPosition();
 	xDrowScreen = 0;
 	yDrowScreen = 0;
 	xDrowWell = 1;
@@ -102,15 +102,15 @@ ITetramino* TestApp::GetTetramino()
 
 	for (int i = 0; i < 4; ++i)
 	{
-		old_x_position = mOldFigureStartPosition.X + Old_Position[i].X;
-		old_y_position = mOldFigureStartPosition.Y + Old_Position[i].Y;
+		old_x_position = mOldFigureStartPosition.mX + Old_Position[i].mX;
+		old_y_position = mOldFigureStartPosition.mY + Old_Position[i].mY;
 		mWell[old_y_position][old_x_position] = L'.';
 	}
 
 	for (int i = 0; i < 4; ++i)
 	{
-		new_x_position = mNewFigureStartPosition.X + New_Position[i].X;
-		new_y_position = mNewFigureStartPosition.Y + New_Position[i].Y;
+		new_x_position = mNewFigureStartPosition.mX + New_Position[i].mX;
+		new_y_position = mNewFigureStartPosition.mY + New_Position[i].mY;
 
 		mWell[new_y_position][new_x_position] = L'@';
 	}
@@ -125,8 +125,8 @@ ITetramino* TestApp::GetTetramino()
 {
 	for (int i = 0; i < 4; ++i)
 	{
-		const int next_x_position = mNewFigureStartPosition.X + PtrTetra->get_position()[i].X;
-		const int next_y_position = mNewFigureStartPosition.Y + PtrTetra->get_position()[i].Y;
+		const int next_x_position = mNewFigureStartPosition.mX + PtrTetra->GetPosition()[i].mX;
+		const int next_y_position = mNewFigureStartPosition.mY + PtrTetra->GetPosition()[i].mY;
 
 		const bool tempX = (next_x_position >= 0) && (next_x_position < mWell[i].size());
 		const bool tempY = (next_y_position >= 0) && (next_y_position < mWell.size());
@@ -170,7 +170,7 @@ ITetramino* TestApp::GetTetramino()
 
 	void TestApp::DrowPreview()//рисует анонс фигуры
 	{	
-		Figure Preview = PtrTetraNext->get_position();
+		Figure Preview = PtrTetraNext->GetPosition();
 
 		for (int i = 0; i < mPreviewWidth; i++)
 		{
@@ -182,7 +182,7 @@ ITetramino* TestApp::GetTetramino()
 
 		for (int i = 0; i < 4; ++i)
 		{
-			SetChar((xDrowPreview + Preview[i].X)+1, yDrowPreview + Preview[i].Y, L'@');
+			SetChar((xDrowPreview + Preview[i].mX)+1, yDrowPreview + Preview[i].mY, L'@');
 		}
 	}
 
@@ -232,7 +232,7 @@ ITetramino* TestApp::GetTetramino()
 
 	bool TestApp::belongs_to_figure(const COORD_& coord)
 	{
-        const auto figure = PtrTetraCurrent->get_position();
+        const auto figure = PtrTetraCurrent->GetPosition();
 
 		for (size_t i = 0; i < figure.size(); i++)
 		{
@@ -297,7 +297,7 @@ ITetramino* TestApp::GetTetramino()
 
 	bool TestApp::IsGameOver()
 	{
-		return (mNewFigureStartPosition.X == mDefaultFigureStartPositionX) && (mNewFigureStartPosition.Y == 1);
+		return (mNewFigureStartPosition.mX == mDefaultFigureStartPositionX) && (mNewFigureStartPosition.mY == 1);
 	}
 	
 
@@ -309,15 +309,15 @@ ITetramino* TestApp::GetTetramino()
 		//поворот фигуры
 		case 32:
 			//clearKeyboardBuffer();
-            Old_Position = PtrTetraCurrent->get_position();
-            PtrTetraCurrent->rotate();
-            New_Position = PtrTetraCurrent->get_position();
+            Old_Position = PtrTetraCurrent->GetPosition();
+            PtrTetraCurrent->Rotate();
+            New_Position = PtrTetraCurrent->GetPosition();
 			//если развернутая фигура выходит за пределы колодца, отодвигаем точку начала отрисовки фигуры по оси Х на 1 назад
 			for (int i = 0; i < New_Position.size(); i++)
 			{
-				if ((mNewFigureStartPosition.X + New_Position[i].X) >= mWell[0].size())
+				if ((mNewFigureStartPosition.mX + New_Position[i].mX) >= mWell[0].size())
 				{
-					--mNewFigureStartPosition.X;
+					--mNewFigureStartPosition.mX;
 					i = 0;
 				}
 			}
@@ -328,10 +328,10 @@ ITetramino* TestApp::GetTetramino()
 		//влево
 		case 75:
 			//clearKeyboardBuffer();
-			--mNewFigureStartPosition.X;
+			--mNewFigureStartPosition.mX;
             if (!CanMoveFigure(PtrTetraCurrent))
 			{
-				++mNewFigureStartPosition.X;
+				++mNewFigureStartPosition.mX;
 				break;
 			}
             SetTetramino(PtrTetraCurrent);
@@ -341,10 +341,10 @@ ITetramino* TestApp::GetTetramino()
 		//вправо
 		case 77:
 			//clearKeyboardBuffer();
-			++mNewFigureStartPosition.X;
+			++mNewFigureStartPosition.mX;
             if (!CanMoveFigure(PtrTetraCurrent))
 			{
-				--mNewFigureStartPosition.X;
+				--mNewFigureStartPosition.mX;
 				break;
 			}
             SetTetramino(PtrTetraCurrent);
@@ -375,7 +375,7 @@ ITetramino* TestApp::GetTetramino()
 			 {
                  SetTetramino(PtrTetraCurrent);
 				 DrowWell();
-				 mNewFigureStartPosition.Y++;
+				 mNewFigureStartPosition.mY++;
 			 }
 			 else
 			 {
@@ -385,15 +385,15 @@ ITetramino* TestApp::GetTetramino()
 								 return;
 							 }
 				 DeleteFilledLines();
-				 mNewFigureStartPosition.X = mDefaultFigureStartPositionX;
-				 mNewFigureStartPosition.Y = mDefaultFigureStartPositionY;
+				 mNewFigureStartPosition.mX = mDefaultFigureStartPositionX;
+				 mNewFigureStartPosition.mY = mDefaultFigureStartPositionY;
 				 mOldFigureStartPosition = mNewFigureStartPosition;
 				 mCurrentSpeed = mDefaultSpeed;
                  delete PtrTetraCurrent;
                  PtrTetraCurrent = PtrTetraNext;
 				 PtrTetraNext = GetTetramino();
-                 Old_Position = PtrTetraCurrent->get_position();
-                 New_Position = PtrTetraCurrent->get_position();
+                 Old_Position = PtrTetraCurrent->GetPosition();
+                 New_Position = PtrTetraCurrent->GetPosition();
 				 DrowWell();
 				 DrowScore();
 				 DrowPreview();

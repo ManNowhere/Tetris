@@ -37,11 +37,11 @@ BaseApp::BaseApp(int xSize, int ySize) : X_SIZE(xSize), Y_SIZE(ySize)
 
 	mChiBuffer = (CHAR_INFO*)malloc((X_SIZE+1)*(Y_SIZE+1)*sizeof(CHAR_INFO));
 
-	mDwBufferSize.X = X_SIZE + 1;
-	mDwBufferSize.Y = Y_SIZE + 1;		// размер буфера данных
+	mDwBufferSize.mX = X_SIZE + 1;
+	mDwBufferSize.mY = Y_SIZE + 1;		// размер буфера данных
 
-	mDwBufferCoord.X = 0;
-	mDwBufferCoord.Y = 0;				// координаты €чейки
+	mDwBufferCoord.mX = 0;
+	mDwBufferCoord.mY = 0;				// координаты €чейки
 
 	mLpWriteRegion.Left = 0;
 	mLpWriteRegion.Top = 0;

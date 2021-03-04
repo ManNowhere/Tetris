@@ -5,95 +5,95 @@
 
 
 
-T::T() : Tetra_form(FormSize, std::vector<COORD_>(4))
+T::T() : TetraForm(mFormSize, std::vector<COORD_>(4))
 {
 	initTetraForm();
 }
 
 void T::initTetraForm()
 {
-	Tetra_form[0] = { {0, 1}, {1, 0}, {1, 1}, {1, 2} };
-	Tetra_form[1] = { {1, 0}, {0, 1}, {1, 1}, {2, 1} };
-	Tetra_form[2] = { {0, 0}, {0, 1}, {1, 1}, {0, 2} };
-	Tetra_form[3] = { {0, 0}, {1, 0}, {2, 0}, {1, 1} };
+	TetraForm[0] = { {0, 1}, {1, 0}, {1, 1}, {1, 2} };
+	TetraForm[1] = { {1, 0}, {0, 1}, {1, 1}, {2, 1} };
+	TetraForm[2] = { {0, 0}, {0, 1}, {1, 1}, {0, 2} };
+	TetraForm[3] = { {0, 0}, {1, 0}, {2, 0}, {1, 1} };
 }
 
-std::vector<COORD_>& T::get_position()
+std::vector<COORD_>& T::GetPosition()
 {
-	return Tetra_form[t];
+	return TetraForm[mT];
 }
 
 //имеем массив нынешнего положения фигуры и возвращаем следующий
-std::vector<COORD_>& T::rotate()
+std::vector<COORD_>& T::Rotate()
 {
-	++t;
-	if (t == FormSize)
+	++mT;
+	if (mT == mFormSize)
 	{
-		t = 0;
+		mT = 0;
 	}
-	return Tetra_form.at(t);
+	return TetraForm.at(mT);
 	
 }
 
 
 //J
-J::J() : Tetra_form(FormSize, std::vector<COORD_>(4))
+J::J() : TetraForm(mFormSize, std::vector<COORD_>(4))
 {
 	J::initTetraForm();
 }
 
 void J::initTetraForm()
 {
-	Tetra_form[0] = { {1, 0}, {1, 1}, {1, 2}, {0, 2} };
-	Tetra_form[1] = { {0, 0}, {0, 1}, {1, 1}, {2, 1} };
-	Tetra_form[2] = { {0, 0}, {1, 0}, {0, 1}, {0, 2} };
-	Tetra_form[3] = { {0, 0}, {1, 0}, {2, 0}, {2, 1} };
+	TetraForm[0] = { {1, 0}, {1, 1}, {1, 2}, {0, 2} };
+	TetraForm[1] = { {0, 0}, {0, 1}, {1, 1}, {2, 1} };
+	TetraForm[2] = { {0, 0}, {1, 0}, {0, 1}, {0, 2} };
+	TetraForm[3] = { {0, 0}, {1, 0}, {2, 0}, {2, 1} };
 }
 
-std::vector<COORD_>& J::get_position()
+std::vector<COORD_>& J::GetPosition()
 {
-	return Tetra_form[j];
+	return TetraForm[mJ];
 }
 
 //имеем массив нынешнего положения фигуры и возвращаем следующий
-std::vector<COORD_>& J::rotate()
+std::vector<COORD_>& J::Rotate()
 {
-	++j;
-	if (j == FormSize)
+	++mJ;
+	if (mJ == mFormSize)
 	{
-		j = 0;
+		mJ = 0;
 	}
-	return Tetra_form.at(j);
+	return TetraForm.at(mJ);
 }
 
 
 
 //I
-I::I() : Tetra_form(FormSize, std::vector<COORD_>(4))
+I::I() : TetraForm(mFormSize, std::vector<COORD_>(4))
 {
 	I::initTetraForm();
 }
 
 void I::initTetraForm()
 {
-	Tetra_form[0] = { {0, 0}, {0, 1}, {0, 2}, {0, 3} };
-	Tetra_form[1] = { {0, 0}, {1, 0}, {2, 0}, {3, 0} };
+	TetraForm[0] = { {0, 0}, {0, 1}, {0, 2}, {0, 3} };
+	TetraForm[1] = { {0, 0}, {1, 0}, {2, 0}, {3, 0} };
 }
 
-std::vector<COORD_>& I::get_position()
+std::vector<COORD_>& I::GetPosition()
 {
-	return Tetra_form[i];
+	return TetraForm[mI];
 }
 
 //имеем массив нынешнего положения фигуры и возвращаем следующий
-std::vector<COORD_>& I::rotate()
+std::vector<COORD_>& I::Rotate()
 {
-	++i;
-	if (i == FormSize)
+	++mI;
+	if (mI == mFormSize)
 	{
-		i = 0;
+		mI = 0;
 	}
-	return Tetra_form.at(i);
+	return TetraForm.at(mI);
 
 }
 
@@ -101,57 +101,57 @@ std::vector<COORD_>& I::rotate()
 
 
 //O
-O::O() : Tetra_form(FormSize, std::vector<COORD_>(4))
+O::O() : TetraForm(mFormSize, std::vector<COORD_>(4))
 {
 	O::initTetraForm();
 }
 
 void O::initTetraForm()
 {
-	Tetra_form[0] = { {0, 0}, {1, 0}, {0, 1}, {1, 1} };
+	TetraForm[0] = { {0, 0}, {1, 0}, {0, 1}, {1, 1} };
 }
 
-std::vector<COORD_>& O::get_position()
+std::vector<COORD_>& O::GetPosition()
 {
-	return Tetra_form[0];
+	return TetraForm[0];
 }
 
 //имеем массив нынешнего положения фигуры и возвращаем следующий
-std::vector<COORD_>& O::rotate()
+std::vector<COORD_>& O::Rotate()
 {
-	return Tetra_form.at(0);
+	return TetraForm.at(0);
 }
 
 
 
 //L
-L::L() : Tetra_form(FormSize, std::vector<COORD_>(4))
+L::L() : TetraForm(mFormSize, std::vector<COORD_>(4))
 {
 	L::initTetraForm();
 }
 
 void L::initTetraForm()
 {
-	Tetra_form[0] = { {0, 0}, {0, 1}, {0, 2}, {1, 2} };
-	Tetra_form[1] = { {0, 0}, {1, 0}, {2, 0}, {0, 1} };
-	Tetra_form[2] = { {0, 0}, {1, 0}, {1, 1}, {1, 2} };
-	Tetra_form[3] = { {2, 0}, {0, 1}, {1, 1}, {2, 1} };
+	TetraForm[0] = { {0, 0}, {0, 1}, {0, 2}, {1, 2} };
+	TetraForm[1] = { {0, 0}, {1, 0}, {2, 0}, {0, 1} };
+	TetraForm[2] = { {0, 0}, {1, 0}, {1, 1}, {1, 2} };
+	TetraForm[3] = { {2, 0}, {0, 1}, {1, 1}, {2, 1} };
 }
 
-std::vector<COORD_>& L::get_position()
+std::vector<COORD_>& L::GetPosition()
 {
-	return Tetra_form[l];
+	return TetraForm[mL];
 }
 
 //имеем массив нынешнего положения фигуры и возвращаем следующий
-std::vector<COORD_>& L::rotate()
+std::vector<COORD_>& L::Rotate()
 {
-	++l;
-	if (l == FormSize)
+	++mL;
+	if (mL == mFormSize)
 	{
-		l = 0;
+		mL = 0;
 	}
-	return Tetra_form.at(l);
+	return TetraForm.at(mL);
 
 }
 
@@ -159,32 +159,32 @@ std::vector<COORD_>& L::rotate()
 
 
 //Z
-Z::Z() : Tetra_form(FormSize, std::vector<COORD_>(4))
+Z::Z() : TetraForm(mFormSize, std::vector<COORD_>(4))
 {
 	Z::initTetraForm();
 }
 
 void Z::initTetraForm()
 {
-	Tetra_form[0] = { {0, 0}, {1, 0}, {1, 1}, {2, 1} };
-	Tetra_form[1] = { {1, 0}, {0, 1}, {1, 1}, {0, 2} };
+	TetraForm[0] = { {0, 0}, {1, 0}, {1, 1}, {2, 1} };
+	TetraForm[1] = { {1, 0}, {0, 1}, {1, 1}, {0, 2} };
 
 }
 
-std::vector<COORD_>& Z::get_position()
+std::vector<COORD_>& Z::GetPosition()
 {
-	return Tetra_form[z];
+	return TetraForm[mZ];
 }
 
 //имеем массив нынешнего положения фигуры и возвращаем следующий
-std::vector<COORD_>& Z::rotate()
+std::vector<COORD_>& Z::Rotate()
 {
-	++z;
-	if (z == FormSize)
+	++mZ;
+	if (mZ == mFormSize)
 	{
-		z = 0;
+		mZ = 0;
 	}
-	return Tetra_form.at(z);
+	return TetraForm.at(mZ);
 
 }
 
@@ -192,30 +192,30 @@ std::vector<COORD_>& Z::rotate()
 
 
 //S
-S::S() : Tetra_form(FormSize, std::vector<COORD_>(4))
+S::S() : TetraForm(mFormSize, std::vector<COORD_>(4))
 {
 	S::initTetraForm();
 }
 
 void S::initTetraForm()
 {
-	Tetra_form[0] = { {1, 0}, {2, 0}, {0, 1}, {1, 1} };
-	Tetra_form[1] = { {0, 0}, {0, 1}, {1, 1}, {1, 2} };
+	TetraForm[0] = { {1, 0}, {2, 0}, {0, 1}, {1, 1} };
+	TetraForm[1] = { {0, 0}, {0, 1}, {1, 1}, {1, 2} };
 }
 
-std::vector<COORD_>& S::get_position()
+std::vector<COORD_>& S::GetPosition()
 {
-	return Tetra_form[s];
+	return TetraForm[mS];
 }
 
 //имеем массив нынешнего положения фигуры и возвращаем следующий
-std::vector<COORD_>& S::rotate()
+std::vector<COORD_>& S::Rotate()
 {
-	++s;
-	if (s == FormSize)
+	++mS;
+	if (mS == mFormSize)
 	{
-		s = 0;
+		mS = 0;
 	}
-	return Tetra_form.at(s);
+	return TetraForm.at(mS);
 
 }
